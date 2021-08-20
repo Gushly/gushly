@@ -1,6 +1,8 @@
 const hre = require("hardhat");
 const fs = require('fs');
 
+
+// We can use this template to deploy our Harmony contracts
 async function main() {
   const NFTMarket = await hre.ethers.getContractFactory("NFTMarket");
   const nftMarket = await NFTMarket.deploy();
