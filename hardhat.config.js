@@ -2,8 +2,8 @@ require('@nomiclabs/hardhat-waffle');
 require('dotenv/config');
 
 const fs = require('fs');
-// const privateKey = fs.readFileSync(".secret").toString().trim() || "01234567890123456789";
-// const infuraId = fs.readFileSync(".infuraid").toString().trim() || "";
+const privateKey = fs.readFileSync(".secret").toString().trim() || "01234567890123456789";
+const infuraId = fs.readFileSync(".infuraid").toString().trim() || "";
 
 console.log('env:: ', process.env.FORKING);
 console.log('env:: ', process.env.ALCHEMY_API_KEY);
@@ -22,20 +22,11 @@ module.exports = {
       tags: ['test', 'local'],
       blockNumber: 11095000,
     },
-    /*
-    mumbai: {
-      // Infura
-      // url: `https://polygon-mumbai.infura.io/v3/${infuraId}`
-      url: "https://rpc-mumbai.matic.today",
-      accounts: [privateKey]
-    },
-    matic: {
-      // Infura
-      // url: `https://polygon-mainnet.infura.io/v3/${infuraId}`,
-      url: "https://rpc-mainnet.maticvigil.com",
-      accounts: [privateKey]
+
+    harmony_testnet: {
+      url: 'https://api.s0.b.hmny.io',
+      accounts: [privateKey],
     }
-    */
   },
   solidity: {
     version: '0.8.4',
