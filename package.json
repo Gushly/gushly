@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy:contract:testnet": "npx hardhat run scripts/deploy.js --network harmony_testnet"
+    "deploy:contract:testnet": "npx hardhat run scripts/deploy_ballot.js --network harmony_testnet"
   },
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",

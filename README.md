@@ -57,3 +57,6 @@ npx hardhat run scripts/deploy.js --network <network-name>
 2. Testnet block explorer URL: `https://explorer.pops.one/`
 3. To convert **bech32** address to Ethereum style hex address
 `https://explorer.harmony.one/#/address/one1pdv9lrdwl0rg5vglh4xtyrv3wjk3wsqket7zxy`
+
+4. Check Harmony Network status: `https://status.harmony.one/`
+5. 
