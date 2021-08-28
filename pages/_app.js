@@ -1,5 +1,15 @@
 import '../styles/globals.css'
 import Link from 'next/link'
+// import { DAppProvider, useEtherBalance, useEthers, ChainId } from '@usedapp/core'
+
+// // supportedChainIds: ['1666600000', '1666700000', '1666700001', '1666700002', '1666700003'],
+// const config = {
+//   readOnlyChainId: ChainId.Harmony,
+
+//   readOnlyUrls: {
+//     [ChainId.Harmony]: "https://api.s0.b.hmny.io"
+//   }
+// }
 
 function Marketplace({ Component, pageProps }) {
   return (

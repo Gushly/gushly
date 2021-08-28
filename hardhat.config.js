@@ -20,7 +20,6 @@ module.exports = {
       live: false,
       saveDeployments: true,
       tags: ['test', 'local'],
-      blockNumber: 11095000,
     },
 
     harmony_testnet: {
