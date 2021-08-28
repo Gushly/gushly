@@ -1,30 +1,42 @@
-const hre = require("hardhat");
-const fs = require('fs');
-
 async function main() {
-  const NFTMarket = await hre.ethers.getContractFactory("NFTMarket");
-  const nftMarket = await NFTMarket.deploy();
-  await nftMarket.deployed();
-  console.log("nftMarket deployed to:", nftMarket.address);
+  const [deployer] = await ethers.getSigners();
 
-  const NFT = await hre.ethers.getContractFactory("NFT");
-  const nft = await NFT.deploy(nftMarket.address);
-  await nft.deployed();
-  console.log("nft deployed to:", nft.address);
+  console.log("Deploying contracts with the account:", deployer.address);
+  console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  let config = `
-  export const nftmarketaddress = "${nftMarket.address}"
-  export const nftaddress = "${nft.address}"
-  `
+  const GushlyFactory = await ethers.getContractFactory('GushlyFactory');
+  const gushlyFactory = await GushlyFactory.deploy();
 
-  let data = JSON.stringify(config)
-  fs.writeFileSync('config.js', JSON.parse(data))
+  console.log('GushlyFactory contract address:', gushlyFactory.address);
 
+  // We also save the contract's artifacts and address in the frontend directory
+  saveFrontendFiles(gushlyFactory);
+}
+
+function saveFrontendFiles(gushlyFactory) {
+  const fs = require("fs");
+  const contractsDir = __dirname + "/../frontend/src/contracts";
+
+  if (!fs.existsSync(contractsDir)) {
+    fs.mkdirSync(contractsDir);
+  }
+
+  fs.writeFileSync(
+    contractsDir + "/contract-address.json",
+    JSON.stringify({ GushlyFactory: gushlyFactory.address }, undefined, 2)
+  );
+
+  const GushlyFactoryArtifact = artifacts.readArtifactSync("GushlyFactory");
+
+  fs.writeFileSync(
+    contractsDir + "/GushlyFactory.json",
+    JSON.stringify(GushlyFactoryArtifact, null, 2)
+  );
 }
 
 main()
   .then(() => process.exit(0))
-  .catch(error => {
+  .catch((error) => {
     console.error(error);
     process.exit(1);
   });
