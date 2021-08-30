@@ -50,4 +50,5 @@ export async function claimPayment(amount, signature) {
   console.log(transaction)
   return transaction;
 }
+
 // signPayment()

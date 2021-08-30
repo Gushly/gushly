@@ -73,4 +73,17 @@ This will put contract address in `./config.js` file. Please check `scripts/depl
 `https://explorer.harmony.one/#/address/one1pdv9lrdwl0rg5vglh4xtyrv3wjk3wsqket7zxy`
 
 4. Check Harmony Network status: `https://status.harmony.one/`
-5. 
+5. Component libray: https://ant.design/components
+
+
+
+
+1. Main Parts:
+   Smart contract
+2. Front-end : what we see on the screen
+3. Backend: Database, authentication, messaging, etc. 
+
+
+
+Run
+```yarn run deploy:contract:testnet```

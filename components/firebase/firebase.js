@@ -59,6 +59,10 @@ class Firebase {
   createEngagement = (engagement) => {
     return this.db.collection('engagements').add(engagement);
   }
+
+  getEngagements = (id) => {
+    return this.db.collection('engagements').where('id', '==', id).get();
+  }
 }
 
 export default new Firebase();

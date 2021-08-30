@@ -34,6 +34,7 @@ async function main(contractName, params) {
   try {
     // Here change contract name and param
     await main("ReceiverPays");
+
     process.exit(0)
   } catch (error) {
     console.error(error);
