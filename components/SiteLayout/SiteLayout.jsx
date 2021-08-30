@@ -23,9 +23,16 @@ function SiteLayout({ children, user }) {
           }
           {
             isAuthenticated && (
+              <Link href="/dashboard">Dashboard </Link>
+            )
+          }
+          {
+            isAuthenticated && (
               <Button type="default" onClick={firebase.doSignOut}>Logout</Button>
             )
           }
+
+
 
         </nav>
       </Header>
