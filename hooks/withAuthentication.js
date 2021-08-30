@@ -14,7 +14,6 @@ const withAuthentication = (Component) => {
 
     const next = (authUser) => {
       saveToLocalStorage(authUser);
-      props.setAuthUser(authUser);
       dispatch({ type: SET_AUTH_USER, payload: authUser });
     };
     const fallback = () => {
@@ -23,6 +22,7 @@ const withAuthentication = (Component) => {
     };
     useEffect(() => {
       const authUser = JSON.parse(localStorage.getItem('authUser'));
+      console.log("auth user:: ", authUser)
       dispatch({ type: SET_AUTH_USER, payload: authUser });
       firebase.onAuthChangeListener(next, fallback);
     }, []);

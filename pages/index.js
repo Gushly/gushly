@@ -26,13 +26,8 @@ function Home() {
   //   console.log(transaction)
   // }
 
-  return (<div className="container max-w-md mt-10 mx-auto ">
-    {/* <input className="w-full p-2 mr-2 border-2" type="text" placeholder="Address" value={address} onChange={e => setAddress(e.target.value)} />
-    <button className="primary btn" onClick={() => giveRightToVote(address)}>Give right to vote</button>
-    <br /> */}
-    <h1>Hello Streampay</h1>
-    <SignIn />
-
+  return (<div className="">
+    Welcome to Gushly
   </div>)
 }
 

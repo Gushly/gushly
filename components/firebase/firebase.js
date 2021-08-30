@@ -33,9 +33,13 @@ class Firebase {
     return this.auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         this.user(authUser.uid)
-          .once('value')
-          .then((snapshot) => {
-            const dbUser = snapshot.val();
+          .get()
+          .then((doc) => {
+            let dbUser = {};
+            if (doc.exists) {
+              dbUser = doc.data();
+            }
+            console.log("DB user:: ", dbUser)
             const user = {
               uid: authUser.uid,
               email: authUser.email,

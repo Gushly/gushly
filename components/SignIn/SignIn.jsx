@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { withRouter } from 'next/router';
+import { Button } from 'antd'
+import { useRouter } from 'next/router';
 import FirebaseContext from '../firebase/context';
 import { ROUTES, ACCOUNT_TYPE } from '../../constants';
 
 function SignInPage(props) {
   const firebase = useContext(FirebaseContext);
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter()
   const handleGoogleSignIn = () => {
     firebase
       .doGoogleSignIn()
@@ -21,7 +23,7 @@ function SignInPage(props) {
       })
       .then(() => {
         console.log('Authentication successful!')
-        // props.history.push(ROUTES.HOME);
+        router.push(ROUTES.DASHBOARD)
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -34,7 +36,7 @@ function SignInPage(props) {
   return (
     <div>
       <h3>Sign In Page</h3>
-      <button onClick={handleGoogleSignIn}>Sign In with Google </button>
+      <Button type="primary" onClick={handleGoogleSignIn}>Sign In with Google </Button>
       <button onClick={handleSignOut}>Logout</button>
       {!!errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
