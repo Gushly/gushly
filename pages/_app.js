@@ -1,37 +1,50 @@
 import '../styles/globals.css'
-import Link from 'next/link'
+import 'antd/dist/antd.css';
+import App from 'next/app'
+import { END } from 'redux-saga'
+import SiteLayout from '../components/SiteLayout/SiteLayout'
+import { wrapper } from '../store'
+import FirebaseContext from '../components/firebase/context'
+import firebase
+  from '../components/firebase/firebase'
 
-function Marketplace({ Component, pageProps }) {
-  return (
-    <div>
-      <nav className="border-b p-6">
-        <p className="text-4xl font-bold">Stream Pay</p>
-        {/* <div className="flex mt-4">
-          <Link href="/">
-            <a className="mr-4 text-pink-500">
-              Home
-            </a>
-          </Link>
-          <Link href="/create-item">
-            <a className="mr-6 text-pink-500">
-              Sell Digital Asset
-            </a>
-          </Link>
-          <Link href="/my-assets">
-            <a className="mr-6 text-pink-500">
-              My Digital Assets
-            </a>
-          </Link>
-          <Link href="/creator-dashboard">
-            <a className="mr-6 text-pink-500">
-              Creator Dashboard
-            </a>
-          </Link>
-        </div> */}
-      </nav>
-      <Component {...pageProps} />
-    </div>
-  )
+
+class WrappedApp extends App {
+  static getInitialProps = async ({ Component, ctx }) => {
+    const pageProps = {
+      ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+    };
+    if (ctx.req) {
+      // ctx.store.dispatch(END);
+      // await ctx.store.sagaTask.toPromise();
+    }
+    return {
+      pageProps
+    }
+  }
+
+  render() {
+    const { Component, pageProps } = this.props;
+    return (
+      <FirebaseContext.Provider value={firebase}>
+        <SiteLayout>
+          <Component {...pageProps} />
+        </SiteLayout>
+      </FirebaseContext.Provider>
+    )
+  }
 }
 
-export default Marketplace
+// function App({ Component, pageProps }) {
+//   return (
+//     <FirebaseContext.Provider value={firebase}>
+//       <div>
+//         <Header />
+//         <Component {...pageProps} />
+//       </div>
+//     </FirebaseContext.Provider>
+//   )
+// }
+
+
+export default wrapper.withRedux(WrappedApp);
