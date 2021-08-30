@@ -30,14 +30,10 @@ function SignInPage(props) {
       });
   };
 
-  const handleSignOut = () => {
-    firebase.doSignOut();
-  };
   return (
     <div>
       <h3>Sign In Page</h3>
       <Button type="primary" onClick={handleGoogleSignIn}>Sign In with Google </Button>
-      <button onClick={handleSignOut}>Logout</button>
       {!!errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );

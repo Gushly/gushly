@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy:contract:testnet": "npx hardhat run scripts/deploy_ballot.js --network harmony_testnet"
+    "deploy:contract:testnet": "npx hardhat run scripts/deploy_ballot.js --network harmony_testnet",
+    "deploy:contract": "npx hardhat run scripts/deploy.js --network localhost"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
@@ -36,7 +37,6 @@
   },
   "devDependencies": {
     "eslint": "7.29.0",
-    "eslint-config-next": "11.0.1",
-    "postcss": "^8.3.5"
+    "eslint-config-next": "11.0.1"
   }
 }

@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import withAuthorization from '../hooks/withAuthorization'
-import Dashboard from '../components/Dashboard/Dashboard'
+import { Button } from 'antd'
+import EngagementFormModal from '../components/EngagementFormModal/EngagementFormModal'
 
 function DashboardPage() {
+  const [showEngagementModal, setShowEngagementModal] = useState(false)
+  const handleCancel = () => {
+    setShowEngagementModal(false)
+  }
   return (
-    <Dashboard />
+    <div>
+      <Button onClick={() => setShowEngagementModal(true)}> Create New Engagement</Button>
+      <EngagementFormModal
+        isVisible={showEngagementModal}
+        handleCancel={handleCancel}
+      />
+    </div>
   )
 }
 

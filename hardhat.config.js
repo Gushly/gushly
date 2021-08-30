@@ -3,7 +3,7 @@ require('dotenv/config');
 
 const fs = require('fs');
 const privateKey = fs.readFileSync(".secret").toString().trim() || "01234567890123456789";
-const infuraId = fs.readFileSync(".infuraid").toString().trim() || "";
+// const infuraId = fs.readFileSync(".infuraid").toString().trim() || "";
 
 console.log('env:: ', process.env.FORKING);
 console.log('env:: ', process.env.ALCHEMY_API_KEY);

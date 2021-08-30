@@ -46,6 +46,20 @@ npx hardhat test
 npx hardhat run scripts/deploy.js --network <network-name>
 ```
 
+## Steps to run project on local machine
+
+1.Start local hardhat network in a separate terminal
+```
+npx hardhat node
+```
+2. Deploy contract on local network
+```
+yarn run deploy:contract
+```
+This will put contract address in `./config.js` file. Please check `scripts/deploy.js` to change contract name.
+
+3. Put Firebase config keys in `.env` file. check `.sample.env` file for more info. connect with Satyam to get keys.
+4. Run `yarn run dev` to start application.
 
 ## Important Urls
 

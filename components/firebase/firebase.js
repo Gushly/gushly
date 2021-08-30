@@ -55,6 +55,10 @@ class Firebase {
       }
     });
   };
+
+  createEngagement = (engagement) => {
+    return this.db.collection('engagements').add(engagement);
+  }
 }
 
 export default new Firebase();
