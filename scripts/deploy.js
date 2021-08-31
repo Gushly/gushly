@@ -8,14 +8,21 @@ async function main(contractName, params) {
 
   const accounts = await hre.ethers.getSigners();
   console.log(accounts[0].address)
-  let contract
-  if (params) {
-    contract = await Contract.deploy(params);
-  } else {
-    contract = await Contract.deploy({
-      value: hre.ethers.utils.parseEther('10'),
-    });
-  }
+
+  // For hardhat local network deployment (no need to add ETH)
+  const contract = await Contract.deploy();
+
+
+  // // For Harmony network deployment
+  // let contract
+  // if (params) {
+  //   contract = await Contract.deploy(params);
+  // } else {
+  //   contract = await Contract.deploy({
+  //     value: hre.ethers.utils.parseEther('10'),
+  //   });
+  // }
+
   await contract.deployed();
   console.log(`${contractName} deployed to: ${contract.address}`);
 
@@ -33,7 +40,7 @@ async function main(contractName, params) {
 (async function () {
   try {
     // Here change contract name and param
-    await main("ReceiverPays");
+    await main("GushlyFactory");
 
     process.exit(0)
   } catch (error) {
