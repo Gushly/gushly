@@ -49,6 +49,7 @@ npx hardhat run scripts/deploy.js --network <network-name>
 ## Steps to run project on local machine
 
 1.Start local hardhat network in a separate terminal
+- Add a `.secret` file (can be an empty file)
 ```
 npx hardhat node
 ```
