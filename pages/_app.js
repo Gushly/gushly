@@ -1,7 +1,6 @@
 import '../styles/globals.css'
 import 'antd/dist/antd.css';
 import App from 'next/app'
-import { END } from 'redux-saga'
 import SiteLayout from '../components/SiteLayout/SiteLayout'
 import { wrapper } from '../store'
 import FirebaseContext from '../components/firebase/context'
@@ -34,17 +33,6 @@ class WrappedApp extends App {
     )
   }
 }
-
-// function App({ Component, pageProps }) {
-//   return (
-//     <FirebaseContext.Provider value={firebase}>
-//       <div>
-//         <Header />
-//         <Component {...pageProps} />
-//       </div>
-//     </FirebaseContext.Provider>
-//   )
-// }
 
 
 export default wrapper.withRedux(WrappedApp);

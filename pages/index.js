@@ -3,6 +3,8 @@ import withAuthentication from '../hooks/withAuthentication'
 import Web3Modal from "web3modal"
 import { ethers } from 'ethers'
 import SignIn from "../components/SignIn/SignIn"
+import { sen } from '../utils/mail'
+import { sendMail } from '../utils/mail'
 // import { ballotAddress } from "../config"
 
 // import Ballot from '../artifacts/contracts/Ballot.sol/Ballot.json'
@@ -28,6 +30,7 @@ function Home() {
 
   return (<div className="">
     Welcome to Gushly
+    <button onClick={() => sendMail()}>Send Email</button>
   </div>)
 }
 

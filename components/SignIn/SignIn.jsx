@@ -4,6 +4,14 @@ import { useRouter } from 'next/router';
 import FirebaseContext from '../firebase/context';
 import { ROUTES, ACCOUNT_TYPE } from '../../constants';
 
+const formattedname = name => {
+  const parts = name.split(' ')
+  const formattedParts = parts.map(part => {
+    return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+  })
+  return formattedParts.join(' ')
+}
+
 function SignInPage(props) {
   const firebase = useContext(FirebaseContext);
   const [errorMessage, setErrorMessage] = useState('');
@@ -13,10 +21,10 @@ function SignInPage(props) {
       .doGoogleSignIn()
       .then((authUser = {}) => {
         const { user: { displayName: fullName, email, photoURL: avatarUrl } = {} } = authUser;
-
+        const name = formattedname(fullName)
         return firebase.user(authUser.user.uid).set({
           accountType: ACCOUNT_TYPE.FREE,
-          fullName,
+          fullName: name,
           email,
           avatarUrl,
         });

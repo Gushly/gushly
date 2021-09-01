@@ -1,0 +1,40 @@
+#components-layout-demo-side .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.sider {
+  min-height: 100vh;
+  width: 200px;
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left:0;
+ }
+
+ .label {
+   margin-top: -5px;
+   color: #fff;
+   font-size: 0.8rem;
+ }
+
+ .smallText {
+  color: #fff;
+  font-size: .6rem;
+  margin-left: -20px;
+}
+
+ .contentContainer {
+   margin-left: 200px;
+ }
+
+ .profile {
+  //  background: white;
+   position: absolute;
+   bottom: 30px;
+ }
