@@ -16,6 +16,7 @@ contract GushlyImplementation {
     uint256 internal projectRate;
     uint256 internal claimHour;
     uint256 internal claimValue;
+    mapping(address => uint256) internal balances;
 
     enum Status {
         pendingEmployeeSignature,
@@ -108,6 +109,10 @@ contract GushlyImplementation {
 
     function getEmployeeBalance() public view onlyEmployee returns (uint256) {
         return employeeBalance;
+    }
+
+    function getEmployeeLocalBalance() public view onlyEmployee returns (uint256) {
+        return balances[msg.sender];
     }
 
     function getTotalPaid()
@@ -228,6 +233,15 @@ contract GushlyImplementation {
         );
         employeeBalance -= _withdrawAmount;
         payable(msg.sender).transfer(_withdrawAmount);
+    }
+
+    function withdrawLocal(uint256 _withdrawAmount) public onlyEmployee {
+        require(
+            _withdrawAmount <= employeeBalance,
+            "Insufficient employee balance"
+        );
+        employeeBalance -= _withdrawAmount;
+        balances[msg.sender] +=_withdrawAmount; //assume starting is 0
     }
 
     function requestTermination() public onlyEmployer {

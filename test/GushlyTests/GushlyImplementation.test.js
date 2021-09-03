@@ -183,6 +183,19 @@ describe('Gushly Implementation', () => {
       });
     });
 
+    describe('EmployeeA locally withdraws 18 ETH', () => {
+      it('Should debit employee balance by 18 ETH', async () => {
+        await gushlyImplementation.approveClaim(ethers.utils.parseEther('18.0'));
+        await gushlyImplementation.connect(employee1).withdrawLocal(ethers.utils.parseEther('18.0'));
+
+        let employeeBalance = await gushlyImplementation.connect(employee1).getEmployeeLocalBalance();
+        employeeBalance = ethers.utils.formatEther(employeeBalance);
+        expect(employeeBalance).to.equal('18.0');
+
+        expect(employee1.balance)
+      });
+    });
+
     describe('Employer terminate contract and withdraw remaining fund', () => {
       it('Should make escrow balance equals 0', async () => {
         await gushlyImplementation.requestTermination();

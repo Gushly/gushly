@@ -7,9 +7,8 @@ import "./GushlyImplementation.sol";
 contract GushlyFactory {
     address public admin;
 
-    mapping(address => GushlyImplementation[]) private gushlyEmployerContracts; // array of addresses
-    mapping(address => GushlyImplementation[]) private gushlyEmployeeContracts; // array of addresses
-    mapping(address => uint256) internal balances;
+    mapping(address => GushlyImplementation[]) internal gushlyEmployerContracts; // array of addresses
+    mapping(address => GushlyImplementation[]) internal gushlyEmployeeContracts; // array of addresses
 
     constructor() {
         admin = msg.sender;
