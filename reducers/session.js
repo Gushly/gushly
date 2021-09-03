@@ -2,6 +2,7 @@ import * as ACTIONS from '../constants/actionTypes';
 
 const initialState = {
   user: null,
+  engagements: []
 };
 
 export default function sessionReducer(state = initialState, action) {
@@ -10,6 +11,11 @@ export default function sessionReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
+      }
+    case ACTIONS.SET_ENGAGEMENTS:
+      return {
+        ...state,
+        engagements: action.payload
       }
     default:
       return state;

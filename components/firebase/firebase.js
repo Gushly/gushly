@@ -57,11 +57,34 @@ class Firebase {
   };
 
   createEngagement = (engagement) => {
+    console.log(engagement)
     return this.db.collection('engagements').add(engagement);
   }
 
-  getEngagements = (id) => {
-    return this.db.collection('engagements').where('id', '==', id).get();
+  getEngagement = async (id) => {
+    const doc = await this.db.collection('engagements').doc(id).get();
+    if (!doc.exists) return null;
+    return doc.data();
+  }
+
+  getEngagementsByClientEmail = async (email) => {
+    console.log("email:: ", email)
+    try {
+      const querySnapshot = await this.db.collection("engagements").where("clientEmail", "==", email).get()
+      const engagements = []
+      querySnapshot.forEach(doc => {
+        const id = doc.id;
+        const data = doc.data();
+        engagements.push({
+          id,
+          ...data
+        })
+      })
+      return engagements;
+    } catch (error) {
+      console.log("Error getting documents: ", error);
+      return [];
+    }
   }
 }
 

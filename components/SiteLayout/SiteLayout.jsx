@@ -44,7 +44,7 @@ function SiteLayout({ children, user }) {
   return (
     <Layout className={Classes.layout}>
       {isDashboardPage ? null : headerContent}
-      <Content>
+      <Content style={{ minHeight: '86vh' }}>
         {children}
       </Content>
       <Footer style={{ textAlign: 'center' }}>Gushly App - Harmony©2021 </Footer>
