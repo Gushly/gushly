@@ -38,7 +38,7 @@ module.exports = {
   },
   paths: {
     sources: './contracts',
-    tests: './test',
+    tests: './test/GushlyTests',
     cache: './cache',
     artifacts: './artifacts',
   },
