@@ -8,6 +8,10 @@ import FirebaseContext from '../components/firebase/context'
 import firebase
   from '../components/firebase/firebase'
 
+// edit import web3reactprovider and ethers for wallet connection
+import { Web3ReactProvider } from '@web3-react/core'
+import ethers from 'ethers'
+
 
 class WrappedApp extends App {
   static getInitialProps = async ({ Component, ctx }) => {
@@ -46,5 +50,18 @@ class WrappedApp extends App {
 //   )
 // }
 
+//get ethers library 
+    function getLibrary(provider) {
+      return new ethers(provider)
+    }
+
+//wrap web3reactprovider as top most element and pass getlibrary
+    function MyApp({ Component, pageProps }) {
+      return (
+        <Web3ReactProvider getLibrary={getLibrary}>
+          <Component {...pageProps} />
+        </Web3ReactProvider>
+      )
+    }
 
 export default wrapper.withRedux(WrappedApp);
