@@ -70,7 +70,7 @@ contract GushlyImplementation {
 
     receive() external payable {
         contractStatus = getContractStatus();
-        require(contractStatus == Status.active);
+        require(contractStatus == Status.active || contractStatus == Status.pendingEmployeeSignature);
         escrowBalance += msg.value;
     }
 
