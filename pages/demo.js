@@ -25,6 +25,7 @@ function Demo() {
   const [contractInfo, setContractInfo] = useState({}); 
   const [claimHour, setClaimHour] = useState(''); 
   const [claimAmount, setClaimAmount] = useState(''); 
+  const [depositAmount, setDepositAmount] = useState(''); 
   const [approveAmount, setApproveAmount] = useState(''); 
   const [withdrawAmount, setWithdrawAmount] = useState(''); 
   const [extendExpiryValue, setExtendExpiryValue] = useState(''); 
@@ -296,6 +297,35 @@ function Demo() {
     }
   }
 
+  async function handleDepositFund(event) {
+    event.preventDefault();
+
+    if (typeof window.ethereum !== 'undefined') {
+      await requestAccount();
+      await initializeEthersGushlyImplementation();
+    }
+
+    try {
+      const amount = ethers.utils.parseEther(`${depositAmount}`)
+      const tx = await gushlyImplementation.depositFund({
+        value: amount
+      });
+      const receipt = await tx.wait();
+
+      if (receipt.status === 0) {
+        throw new Error('Transaction failed.');
+      }
+
+      await getContractInfo();
+      
+    } catch (error) {
+      console.log(error);
+      
+    } finally {
+      setDepositAmount('');
+    }
+  }
+
   async function handleApproveClaim(event) {
     event.preventDefault();
 
@@ -490,6 +520,13 @@ function Demo() {
     
           <h4>Employer: {contractInfo.employer}</h4>
           <p>Escrow Balance: {contractInfo.escrowBalance} ETH</p>
+          {(currentUser === contractInfo.employer) && (contractInfo.contractStatus === 'Active' || contractInfo.contractStatus === 'Pending Employee Signature') && (
+            <form onSubmit={handleDepositFund}>
+              <input type="number" onChange={event => setDepositAmount(event.target.value)} value={depositAmount} placeholder="Amount (ETH)"/>
+              <input type="submit" value="Deposit Fund" />
+            </form>
+          )}
+
           {(contractInfo.contractStatus === 'Active') && (<p>Total Paid: {contractInfo.totalPaid} ETH</p>)}
           {(contractInfo.contractStatus === 'Active') && (<p>Claim: {contractInfo.claimValue} ETH</p>)}
 

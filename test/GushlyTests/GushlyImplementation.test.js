@@ -60,6 +60,18 @@ describe('Gushly Implementation', () => {
     });
   });
 
+  describe('Deposit fund through depositFund function', () => {
+    it('Should credit escrow balance by 50 ETH', async () => {
+      await gushlyImplementation.depositFund({
+        value: ethers.utils.parseEther('50.0')
+      });
+
+      let escrowBalance = await gushlyImplementation.getEscrowBalance();
+      escrowBalance = ethers.utils.formatEther(escrowBalance);
+      expect(escrowBalance).to.equal('50.0');
+    });
+  });
+
   describe('Contract Deposit and Payment', () => {
     beforeEach(async () => {
       await gushlyImplementation.connect(employee1).signContract();
