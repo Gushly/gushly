@@ -74,6 +74,12 @@ contract GushlyImplementation {
         escrowBalance += msg.value;
     }
 
+    function depositFund() public payable {
+        contractStatus = getContractStatus();
+        require(contractStatus == Status.active || contractStatus == Status.pendingEmployeeSignature);
+        escrowBalance += msg.value;
+    }
+
     function signContract() public onlyEmployee {
         contractStatus = getContractStatus();
         require(contractStatus == Status.pendingEmployeeSignature);
